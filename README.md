@@ -18,16 +18,16 @@ chmod +x ./init_dotfiles.sh
 ```
 
 Do a test run (calls dotbot):
+
 ```bash
 ./init_dotfiles.sh test
 ```
 
 Create the real thing (calls dotbot):
+
 ```bash
 ./init_dotfiles.sh verbose-config
 ```
-
-
 
 ### Git Secrets
 
@@ -39,8 +39,6 @@ cd ~/.dotfiles
 git secrets --install
 git secrets --register-aws
 ```
-
-
 
 ### Git Crypt
 
@@ -56,8 +54,6 @@ printf '%s\n' '* filter=git-crypt diff=git-crypt' '.gitattributes !filter !diff'
 git-crypt export-key ~/.ssh/git_crypt_dotfiles
 cp ~/.ssh/git_crypt_personal ~/Tresors/Admin/
 ```
-
-
 
 ### AWS Keys
 
@@ -76,8 +72,6 @@ emacs ~/.aws-rotate-iam-keys
 brew services restart aws-rotate-iam-keys
 ```
 
-
-
 ### Freeze Files
 
 Create a brew file:
@@ -93,11 +87,10 @@ pip3 list --format=freeze > ~/.dotfiles/computing/python_requirements
 ```
 
 Create an R freeze file:
+
 ```bash
 Rscript ~/.dotfiles/admin-tools/store_packages.R
 ```
-
-
 
 ### Commit
 
@@ -111,16 +104,16 @@ git remote add origin git@github.com:<user_name>/<repo_name>.git
 git push -u origin master
 ```
 
-
-
 ## Usage
 
 Clone with all submodules:
+
 ``` bash
 git clone --recursive git@github.com:your-username/dotfiles.git
 ```
 
 Run the setup scripts:
+
 ``` bash
 mv dotfiles .dotfiles
 cd .dotfiles
@@ -133,8 +126,6 @@ Decrypt secrets locally:
 git-crypt unlock ~/.ssh/git_crypt_dotfiles
 ```
 
-
-
 ## Key Model
 
 Be secure with keys:
@@ -143,28 +134,3 @@ Be secure with keys:
 ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519_something -C "someone"
 ssh-copy-id -i ~/.ssh/id_ed25519_something someone@some-ip
 ```
-
-
-
-## macOS Style Guide
-
-- System sans serif font: Open Sans 12 pt
-- System serif font: Libre Baskerville 12 pt
-- System fixed-width font: Hack 10 pt
-- Dark mode
-- Highlight color: #b3a369
-
-
-
-## ToDo
-
-* Consider adding support for [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/)
-* Add install for linux and macos?
-* macOS to make pyproj work:
-  * brew install geos; brew install gdal; brew install spatialindex
-  * sudo -H pip3 install git+https://github.com/jswhit/pyproj.git
-* ensure wakatime installs across IDEs
-* test that all installs correctly across baseimage
-* install?
-  * https://github.com/donnemartin/dev-setup
-  * https://github.com/xonsh/xonsh

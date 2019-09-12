@@ -1,0 +1,22 @@
+############
+# Personal #
+############
+
+Host github-user1
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github_user1
+
+Host github-user2
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github_user2
+
+###########
+# Options #
+###########
+
+Host *
+  ServerAliveInterval 120
+  AddKeysToAgent yes
+  UseKeychain yes

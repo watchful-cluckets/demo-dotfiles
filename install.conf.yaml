@@ -1,0 +1,44 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- shell:
+    - [git submodule sync --recursive, Syncing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
+
+#- brewfile:
+#    file: macos/Brewfile
+
+- link:
+
+    # terminal
+    ~/.hushlogin: config/hushlogin
+    ~/.bash_aliases: shell/bash_aliases
+    ~/.bash_profile: config/bash_profile
+    ~/.bashrc: config/bashrc
+
+    # computing
+    ~/.aws/credentials: secrets/aws-credentials
+    ~/.aws-rotate-iam-keys: secrets/aws-rotate-iam-keys
+    ~/.jupyter/nbconfig/notebook.json: config/jupyter_nbextensions
+    ~/.Rprofile: computing/rprofile
+    ~/.theanorc: computing/theanorc
+    ~/.keras/keras.json: computing/keras
+    ~/.plotly/.config: computing/plotly_config
+    ~/.plotly/.credentials: secrets/plotly-credentials
+
+    # tools
+    ~/.curlrc: config/curlrc
+    ~/.emacs: config/emacs
+    ~/.ssh/config: config/sshconfig
+    ~/.eslintrc.yaml: config/eslintrc.yaml
+    ~/.wakatime.cfg: secrets/wakatime
+    ~/.secrets: secrets
+
+    # git
+    ~/.gitconfig: config/gitconfig
+    ~/.gitignore_global: config/gitignore

@@ -1,0 +1,85 @@
+##################
+# macOS specific #
+##################
+
+alias killfinder="killall Finder"
+alias killdock="killall Dock"
+alias killmenubar="killall SystemUIServer NotificationCenter"
+alias killos="killfinder && killdock && killmenubar"
+alias get-app-id="osascript -e 'id of app \"$1\"'"
+alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"
+alias cleanupad="find . -type d -name '.AppleD*' -ls -exec /bin/rm -r {} \;"
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias desktopshow="defaults write com.apple.finder CreateDesktop -bool true && killfinder"
+alias desktophide="defaults write com.apple.finder CreateDesktop -bool false && killfinder"
+alias deathtodsstore="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
+alias revivedsstore="defaults write com.apple.desktopservices DSDontWriteNetworkStores false"
+
+##################
+##################
+
+# List declared aliases, functions, paths
+alias aliases="alias | sed 's/=.*//'"
+alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
+alias paths='echo -e ${PATH//:/\\n}'
+
+# process monitoring
+alias clearmem='sudo sysctl vm.drop_caches=3'
+alias cpuwatcher='watch -n 1 "ps -e -o pid,user,command,etime,xstat,pmem,pcpu -r | head -n 15"'
+alias memwatcher='watch -n 1 "ps -e -o pid,user,command,etime,xstat,pmem,pcpu -m | head -n 15"'
+#alias zombie_count="ps aux | awk {'print $8'} | grep -c Z"
+#alias zombie_list="ps aux | awk '{ print $8 " " $2 }' | grep -w Z"
+
+# shorthand
+alias clean='rm -f *~ *#'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias df='df -h'
+alias du='du -h'
+
+# source update bash
+alias sc='source ~/.bashrc'
+alias frm='rm -rf'
+alias srm='rm -rfP'
+
+# dir sizes
+alias ddu='du -hs *'
+alias sddu='du -h --max-depth=1 | sort -hr'
+
+# superpowered ls
+alias ls='exa -abghl --git --group-directories-first'
+alias newest='ls -snew'
+
+# find stuff
+alias grepper='grep -n \!:1 * /dev/null'
+
+# start jupyter
+alias ipynote='jupyter notebook'
+alias notebook2jekyll='jupyter-nbconvert --config jekyll-post'
+
+# git shorthand
+alias gis='git status '
+alias gia='git add '
+alias gib='git branch '
+alias gic='git commit'
+alias gid='git diff'
+alias gio='git checkout '
+alias gik='gitk --all&'
+alias gix='gitx --all'
+
+# start jekyll
+alias go_jekyll='bundle exec jekyll serve --watch --trace --drafts --verbose'
+
+# ip addresses
+alias localip="ipconfig getifaddr en0"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
+# update ssh keys; first command prints exit val, so need $2, not $1 as input
+alias keysupdate="eval \"$(ssh-agent -s)\" ; ssh-add -K $2"
+
+# copy public key to clipboard
+alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '>>> Public key copied to clipboard'"
+
+# Python snippets
+alias edit_snippets='sudo emacs -nw /usr/local/share/jupyter/nbextensions/snippets/snippets.json'

@@ -1,0 +1,22 @@
+;; .emacs
+
+;; turn on font-lock mode
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+
+(custom-set-variables
+ ;; always end a file with a newline
+ '(require-final-newline t)
+ ;; default to unified diffs
+ '(diff-switches "-u"))
+
+;; Markdown syntax highlighting
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(autoload 'gfm-mode "markdown-mode"
+  "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
+(put 'upcase-region 'disabled nil)

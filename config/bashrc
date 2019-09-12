@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Path to the bash it configuration
+export BASH_IT="$HOME/.dotfiles/bash-it"
+
+# Path to the wakatime config
+export WAKATIME_IT="$HOME/.dotfiles/bash-wakatime"
+
+# Lock and Load a custom theme file
+# location /.bash_it/themes/
+export BASH_IT_THEME='font'
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+export SCM_GIT_SHOW_DETAILS=true
+export SCM_GIT_SHOW_REMOTE_INFO=auto
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Load Bash It
+source "$BASH_IT"/bash_it.sh
+
+# Load Bash It
+source "$WAKATIME_IT"/bash-wakatime.sh
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EMACS="emacs -nw"
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='emacs'
+else
+  export EDITOR='emacs'
+fi
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# basic stuff
+set autocorrect=1
+set correct=cmd
+set autolist=ambiguous
+set complete=enhance
+set echo_style=both
+set nobeep
+set printexitvalue
+
+# Personal env vars
+export TERM="xterm-color"
+export CLICOLOR="true"
+export LSCOLORS="Bxfxhxdxcxegedabagacad"
+export BLOG_DIR=$HOME/blogs/blog_kc
+export JAVA_HOME=$(/usr/libexec/java_home)
+export SCALA_HOME=/usr/local/scala
+export SPARK_HOME=/usr/local/spark
+export PYSPARK_DRIVER_PYTHON=ipython
+
+# Sonar
+export SONAR_HOME=/usr/local/sonar-scanner
+export SONAR_SCANNER_HOME=/usr/local/sonar-scanner
+
+# Update Path
+export PYTHON_PATH=$(python3 -m site --user-base)
+export PATH="/usr/local/bin:/usr/local/sbin:$PYTHON_PATH/bin:$SONAR_HOME/bin:$SONAR_SCANNER_HOME/bin:$JAVA_HOME/bin:$SCALA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/ec2:$PATH"
+
+# load secrets
+export $(grep -v '^#' $HOME/.dotfiles/secrets/api-keys | xargs)
+export $(grep -v '^#' $HOME/.dotfiles/secrets/work-info | xargs)
+
+# alias definitions
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

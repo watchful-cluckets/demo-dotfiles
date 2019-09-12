@@ -1,0 +1,4 @@
+# Source ~/.bashrc in the event of a shell
+# looking for a .bash_profile
+
+source ~/.bashrc

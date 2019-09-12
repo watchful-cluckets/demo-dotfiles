@@ -1,0 +1,12 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "bash-it"]
+	path = bash-it
+	url = https://github.com/Bash-it/bash-it
+[submodule "bash-wakatime"]
+	path = bash-wakatime
+	url = https://github.com/irondoge/bash-wakatime
+[submodule "dotbot-brewfile"]
+	path = dotbot-brewfile
+	url = https://github.com/sobolevn/dotbot-brewfile.git

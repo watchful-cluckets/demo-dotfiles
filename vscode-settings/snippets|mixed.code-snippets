@@ -1,0 +1,329 @@
+{
+  "OpenAPI Array": {
+    "scope": "yaml, json",
+    "prefix": "oas-array",
+    "body": [
+      "type: array",
+      "description: |",
+      "  TODO",
+      "items:",
+      "  $ref: TODO",
+      "minItems: TODO",
+      "maxItems: TODO",
+      "uniqueItems: TODO",
+      "example: [",
+      "  TODO",
+      "]"
+    ],
+    "description": "OpenAPI Array"
+  },
+  "OpenAPI Object": {
+    "scope": "yaml, json",
+    "prefix": "oas-object",
+    "body": [
+      "type: object",
+      "description: |",
+      "  TODO",
+      "required:",
+      "  - TODO",
+      "properties:",
+      "  TODO:",
+      "example: {",
+      "  TODO",
+      "}"
+    ],
+    "description": "OpenAPI Object"
+  },
+  "OpenAPI int32": {
+    "scope": "yaml, json",
+    "prefix": "oas-int32",
+    "body": [
+      "type: integer",
+      "format: int32",
+      "description: |",
+      "  TODO",
+      "default: TODO",
+      "minimum: -2147483648",
+      "maximum: 2147483647",
+      "example: 12345"
+    ],
+    "description": "OpenAPI Int32"
+  },
+  "OpenAPI int64": {
+    "scope": "yaml, json",
+    "prefix": "oas-int64",
+    "body": [
+      "type: integer",
+      "format: int64",
+      "description: |",
+      "  TODO",
+      "default: TODO",
+      "minimum: −9223372036854775808",
+      "maximum: 9223372036854775807",
+      "example: 1234567890"
+    ],
+    "description": "OpenAPI Int64"
+  },
+  "OpenAPI Float": {
+    "scope": "yaml, json",
+    "prefix": "oas-float",
+    "body": [
+      "type: number",
+      "format: float",
+      "description: |",
+      "  TODO",
+      "default: TODO",
+      "minimum: TODO",
+      "maximum: TODO",
+      "example: 12.345"
+    ],
+    "description": "OpenAPI Double"
+  },
+  "OpenAPI Double": {
+    "scope": "yaml, json",
+    "prefix": "oas-double",
+    "body": [
+      "type: number",
+      "format: double",
+      "description: |",
+      "  TODO",
+      "default: TODO",
+      "minimum: TODO",
+      "maximum: TODO",
+      "example: 12.34567890"
+    ],
+    "description": "OpenAPI Double"
+  },
+  "OpenAPI String": {
+    "scope": "yaml, json",
+    "prefix": "oas-string",
+    "body": [
+      "type: string",
+      "description: |",
+      "  TODO",
+      "pattern: '^[\\w\\d\\s_\\-\\+]*$'",
+      "minLength: 1",
+      "maxLength: 1024",
+      "example: \"TODO\"",
+      ""
+    ],
+    "description": "OpenAPI String"
+  },
+  "OpenAPI Byte": {
+    "scope": "yaml, json",
+    "prefix": "oas-byte",
+    "body": [
+      "type: string",
+      "format: byte",
+      "description: |",
+      "  TODO",
+      "pattern: 'TODO'",
+      "example: \"TODO\"",
+      ""
+    ],
+    "description": "OpenAPI String"
+  },
+  "OpenAPI Binary": {
+    "scope": "yaml, json",
+    "prefix": "oas-binary",
+    "body": [
+      "type: string",
+      "format: binary",
+      "description: |",
+      "  TODO",
+      "pattern: 'TODO'",
+      "example: \"TODO\"",
+      ""
+    ],
+    "description": "OpenAPI String"
+  },
+  "OpenAPI Boolean": {
+    "scope": "yaml, json",
+    "prefix": "oas-boolean",
+    "body": [
+      "type: boolean",
+      "description: |",
+      "  TODO",
+      "default: TODO",
+      "example: true"
+    ],
+    "description": "OpenAPI Boolean"
+  },
+  "OpenAPI Date": {
+    "scope": "yaml, json",
+    "prefix": "oas-date",
+    "body": [
+      "type: string",
+      "format: date",
+      "pattern: ^(?:(?:19[7-9][0-9]|20[0-8][0-9])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)",
+      "description: |",
+      "  A full date given in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) time format.",
+      "example: \"2018-10-02\""
+    ],
+    "description": "OpenAPI Date"
+  },
+  "OpenAPI Datetime": {
+    "scope": "yaml, json",
+    "prefix": "oas-datetime",
+    "body": [
+      "type: string",
+      "format: date-time",
+      "pattern: ^(?:(?:19[7-9][0-9]|20[0-8][0-9])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$",
+      "description: |",
+      "  A full date-timestamp given in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) time format.",
+      "example: \"2018-10-02T12:30:00-04:00\""
+    ],
+    "description": "OpenAPI Datetime"
+  },
+  "OpenAPI Inherit": {
+    "scope": "yaml, json",
+    "prefix": "oas-inherit",
+    "body": [
+      "inherit_schema:",
+      "  allOf:",
+      "    - $ref: \"a.yaml#/a_schema\"",
+      "    - type: object",
+      "      required:",
+      "        - tmp",
+      "      properties:",
+      "        tmp",
+      "      example: {}",
+      ""
+    ],
+    "description": "Inherit schema"
+  },
+  "Javascript Date Footer": {
+    "scope": "js,html",
+    "prefix": "footer-date",
+    "body": [
+      "<script type=\"text/javascript\">",
+      "  document.write(new Date().getFullYear());",
+      "</script>"
+    ],
+    "description": "website footer date"
+  },
+  "Proto OAS field options": {
+    "prefix": "proto-field",
+    "body": [
+      "  [",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\"",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto OAS field options"
+  },
+  "Proto OAS schema options": {
+    "prefix": "proto-schema",
+    "body": [
+      "option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {",
+      "  json_schema : {",
+      "    description : \"TODO\"",
+      "    required : [ ",
+      "      \"a\"",
+      "    ]",
+      "  }",
+      "};"
+    ],
+    "description": "Proto OAS schema options"
+  },
+  "Proto ignore timestamp": {
+    "prefix": "proto-ignore-time",
+    "body": ["// (-- api-linter: core::0142::time-field-type=disabled --)"],
+    "description": ""
+  },
+  "Proto double type": {
+    "prefix": "proto-double",
+    "body": [
+      "  [",
+      "    (validate.rules).double = {",
+      "      gte: 0, ",
+      "      lte: 1000000000",
+      "    },",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\",",
+      "      minimum : 0,",
+      "      maximum : 1000000000",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto double type"
+  },
+  "Proto repeated type": {
+    "prefix": "proto-repeated",
+    "body": [
+      "  [",
+      "    (validate.rules).repeated = {",
+      "      min_items: 0",
+      "    },",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\",",
+      "      min_items : 1,",
+      "      unique_items : true",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto repeated type"
+  },
+  "Proto int32 type": {
+    "prefix": "proto-int32",
+    "body": [
+      "  [",
+      "    (validate.rules).int32 = {",
+      "      gte: 0,",
+      "      lte: 1000000000",
+      "    },",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\",",
+      "      minimum : 0",
+      "      maximum : 1000000000",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto int32 type"
+  },
+  "Proto string type": {
+    "prefix": "proto-string",
+    "body": [
+      "  [",
+      "    (validate.rules).string.pattern = \"TODO\",",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\",",
+      "      pattern: \"TODO\"",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto string type"
+  },
+  "Proto required field": {
+    "prefix": "proto-required",
+    "body": ["(validate.rules).message.required = true,"],
+    "description": "Proto required field"
+  },
+  "Proto enum type": {
+    "prefix": "proto-enum",
+    "body": [
+      "  [",
+      "    (validate.rules).enum.defined_only = true",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"TODO\",",
+      "    }",
+      "  ];"
+    ],
+    "description": "Proto enum type"
+  },
+  "Proto timestamp type": {
+    "prefix": "proto-timestamp",
+    "body": [
+      "  [",
+      "    (validate.rules).timestamp.required = false,",
+      "    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {",
+      "      description : \"A time given as an [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) compliant timestamp which is a subset of the [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) time format standard.\",",
+      "      pattern : \"\"",
+      "    }",
+      "  ];",
+      ";"
+    ],
+    "description": "Proto timestamp type"
+  }
+}

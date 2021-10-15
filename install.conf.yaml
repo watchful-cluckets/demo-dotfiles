@@ -4,7 +4,7 @@
       relink: true
       force: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - shell:
     - [git submodule sync --recursive, Syncing submodules]
@@ -14,31 +14,34 @@
 #    file: macos/Brewfile
 
 - link:
-
-    # terminal
-    ~/.hushlogin: config/hushlogin
+    # shell
     ~/.bash_aliases: shell/bash_aliases
-    ~/.bash_profile: config/bash_profile
-    ~/.bashrc: config/bashrc
+    ~/.bash_profile: shell/bash_profile
+    ~/.bashrc: shell/bashrc
+    ~/.hushlogin: shell/hushlogin
+
+    # secrets
+    ~/.secrets: secrets
+    ~/.ssh/config: secrets/sshconfig
 
     # computing
-    ~/.aws/credentials: secrets/aws-credentials
-    ~/.aws-rotate-iam-keys: secrets/aws-rotate-iam-keys
-    ~/.jupyter/nbconfig/notebook.json: config/jupyter_nbextensions
-    ~/.Rprofile: computing/rprofile
+    ~/.jupyter/nbconfig/notebook.json: computing/jupyter_nbextensions
+    ~/.local/share/jupyter/nbextensions/snippets/snippets.json: computing/snippets.json
     ~/.theanorc: computing/theanorc
     ~/.keras/keras.json: computing/keras
     ~/.plotly/.config: computing/plotly_config
-    ~/.plotly/.credentials: secrets/plotly-credentials
 
-    # tools
+    # tool configs
+    ~/.bin: bin/
     ~/.curlrc: config/curlrc
     ~/.emacs: config/emacs
-    ~/.ssh/config: config/sshconfig
     ~/.eslintrc.yaml: config/eslintrc.yaml
-    ~/.wakatime.cfg: secrets/wakatime
-    ~/.secrets: secrets
+    ~/.gnupg/gpg-agent.conf: config/gpg-agent
+    ~/.gnupg/gpg.conf: config/gpgconf
+    ~/.terminalizer/config.yml: config/terminalizer
 
     # git
-    ~/.gitconfig: config/gitconfig
-    ~/.gitignore_global: config/gitignore
+    ~/.gitconfig: git/gitconfig
+    ~/.gitconfig-work: git/gitconfig-work
+    ~/.gitignore_global: git/gitignore
+    ~/.git-templates/hooks/prepare-commit-msg: git/prepare-commit-msg

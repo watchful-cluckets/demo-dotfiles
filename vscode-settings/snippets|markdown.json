@@ -1,0 +1,72 @@
+{
+  "Markdown metadata": {
+    "prefix": "md-meta",
+    "body": [
+      "---",
+      "date: \"$CURRENT_YEAR - $CURRENT_MONTH_NAME - $CURRENT_DATE\"",
+      "author: \"$1\"",
+      "tags: \"$2\"",
+      "application area: \"$3\"",
+      "---"
+    ],
+    "description": "Add default metadata to your markdown file"
+  },
+  "Markdown 2 Column Table": {
+    "prefix": "md-2tab",
+    "body": [
+      "|         |         |",
+      "| :-----: | :------:|",
+      "|         |         |",
+      "|         |         |",
+      "|         |         |"
+    ],
+    "description": "Add two column table with alignment options."
+  },
+  "Markdown 3 Column Table": {
+    "prefix": "md-3tab",
+    "body": [
+      "|          |          |         |",
+      "| :------: | :------: | :-----: |",
+      "|          |          |         |",
+      "|          |          |         |",
+      "|          |          |         |"
+    ],
+    "description": "Add three column table with alignment options."
+  },
+  "Markdown 4 Column Table": {
+    "prefix": "md-4tab",
+    "body": [
+      "|          |          |          |         |",
+      "| :------: | :------: | :------: | :-----: |",
+      "|          |          |          |         |",
+      "|          |          |          |         |",
+      "|          |          |          |         |"
+    ],
+    "description": "Add four column table with alignment options."
+  },
+  "Markdown tip": {
+    "prefix": "md-tip",
+    "description": "Add a tip block to your markdown",
+    "body": [":::tip", "\"$1\"", ":::", ""]
+  },
+  "Markdown warning": {
+    "prefix": "md-warning",
+    "description": "Add a warning block to your markdown",
+    "body": [":::warning", "\"$1\"", ":::", ""]
+  },
+  "Markdown caution": {
+    "prefix": "md-caution",
+    "description": "Add a warning block to your markdown",
+    "body": [":::caution", "\"$1\"", ":::", ""]
+  },
+  "Markdown note": {
+    "prefix": "md-note",
+    "description": "Add a warning block to your markdown",
+    "body": [":::note", "\"$1\"", ":::", ""]
+  },
+  "Markdown include": {
+    "prefix": "md-include",
+    "description": "Re-use content from other markdown files. Add the relative path to another markdown files in `file` paramter.",
+    "body": ["::include {file=\"$1\"}"]
+  }
+}

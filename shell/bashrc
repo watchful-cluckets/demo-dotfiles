@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+
+# zsh is new default on macOS
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Path to the bash it configuration
+export BASH_IT="$HOME/.dotfiles/bash-it"
+
+# Lock and Load a custom theme file
+# location /.bash_it/themes/
+export BASH_IT_THEME='font'
+
+# Load Bash It
+source "$BASH_IT"/bash_it.sh
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+export SCM_GIT_SHOW_DETAILS=true
+export SCM_GIT_SHOW_REMOTE_INFO=auto
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EMACS="emacs -nw"
+export EMACS="emacs -nw"
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='emacs -nw'
+else
+  export EDITOR='emacs -nw'
+fi
+
+# gpg
+export GPG_TTY=$(tty)
+
+# basic stuff
+set autocorrect=1
+set correct=cmd
+set autolist=ambiguous
+set complete=enhance
+set echo_style=both
+set nobeep
+set printexitvalue
+
+# Personal env vars
+export TERM="xterm-color"
+export CLICOLOR="true"
+export SCALA_HOME=/usr/local/scala
+export SPARK_HOME=/usr/local/spark
+export PYSPARK_DRIVER_PYTHON=ipython
+
+# Java
+if [ "$(uname)" == "Linux" ]; then
+  export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/bin/java
+else
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
+
+# Go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export GOBIN="${GOPATH}/bin"
+
+# git-subrepo
+source ~/.dotfiles/git-subrepo/.rc
+
+# diff-so-fancy
+export PATH="$HOME/.dotfiles/diff-so-fancy:$PATH"
+
+# pyenv prompt change
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+# load secrets
+export $(grep -v '^#' $HOME/.dotfiles/secrets/keys | xargs)
+
+# node version manager -- nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+# cuda
+if [[ -d /usr/local/cuda ]]; then
+  export PATH="usr/local/cuda/bin${PATH:+:${PATH}}"
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/cuda-11.2/targets/x86_64-linux/lib/
+fi
+
+if [[ -d /usr/lib/cuda ]]; then
+  export PATH="usr/local/cuda/bin${PATH:+:${PATH}}"
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/cuda-11.2/targets/x86_64-linux/lib/
+fi
+
+# Update Path
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
+export PATH="$GOROOT:$GOPATH:$GOBIN:$PATH"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYTHON_PATH/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$SCALA_HOME/bin:$PATH"
+export PATH="$SPARK_HOME/bin:$PATH"
+export PATH="$SPARK_HOME/ec2:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.protoc/bin:$PATH"
+
+# python env
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
+if which pyenv-virtualenv-init >/dev/null; then
+  eval "$(pyenv virtualenv-init --path)"
+fi
+export PYTHON_PATH=$(python3 -m site --user-base)
+
+# ssh key agent
+source ~/.bin/ssh-find-agent.sh
+set_ssh_agent_socket
+
+# alias definitions
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi

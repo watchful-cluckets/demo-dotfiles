@@ -1,0 +1,53 @@
+# Title
+
+a simple description
+
+## TOC
+
+pending
+
+## Code Status
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Checked with mypy](https://shields.io/badge/mypy-checked-blue)](https://github.com/python/mypy)
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.0-ff69b4.svg)](.github/CODE_OF_CONDUCT.md)
+
+[![Build Status](https://ci.com/master/badge/icon)](https://ci.com/master/lastBuild/)
+[![Security](https://sonarqube.com/api/project_badges/measure?project=abc&metric=security_rating)](https://sonarqube.com/dashboard?id=abc)
+[![Maintainability](https://sonarqube.com/api/project_badges/measure?project=abc&metric=sqale_rating)](https://sonarqube.com/dashboard?id=abc)
+[![Reliability](https://sonarqube.com/api/project_badges/measure?project=abc&metric=reliability_rating)](https://sonarqube.com/dashboard?id=abc)
+[![Commit Activity](https://shields.com/github/commit-activity/m/abc)](https://github.com/abc/graphs/commit-activity)
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
+pip install foobar
+```
+
+## Usage
+
+```python
+import foobar
+
+foobar.pluralize('word') # returns 'words'
+foobar.pluralize('goose') # returns 'geese'
+foobar.singularize('phenomena') # returns 'phenomenon'
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## FAQs
+
+pending
+
+## Known Bugs
+
+pending

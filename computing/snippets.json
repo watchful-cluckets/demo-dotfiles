@@ -1,0 +1,352 @@
+{
+	"snippets": [{
+			"name": "tip box",
+			"code": [
+				"<div class=\"alert alert-block alert-info\">",
+				"<b>blue tips</b></div>"
+			]
+		},
+		{
+			"name": "alert box",
+			"code": [
+				"<div class=\"alert alert-block alert-warning\">",
+				"<b>yellow alerts</b></div>"
+			]
+		},
+		{
+			"name": "good box",
+			"code": [
+				"<div class=\"alert alert-block alert-success\">",
+				"<b>green news</b></div>"
+			]
+		},
+		{
+			"name": "warning box",
+			"code": [
+				"<div class=\"alert alert-block alert-danger\">",
+				"<b>red warnings</b></div>"
+			]
+		},
+		{
+			"name": "imports-base",
+			"code": [
+				"import datetime as dt",
+				"import glob",
+				"import itertools",
+				"import json",
+				"import os",
+				"import dill",
+				"import pickle",
+				"import random",
+				"import re",
+				"import sys",
+				"import time",
+				"from string import punctuation",
+				"import locale",
+				"locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')"
+
+			]
+		},
+		{
+			"name": "imports-analysis",
+			"code": [
+				"import statistics",
+				"",
+				"import fuzzywuzzy",
+				"import geopandas as gpd",
+				"import humanize",
+				"import janitor",
+				"import janitor.ml",
+				"import missingno as msno",
+				"import numpy as np",
+				"import pandas as pd",
+				"import recordlinkage",
+				"import scipy as sp",
+				"import statsmodels.formula.api as smf",
+				"from pandas_profiling import ProfileReport",
+				"pd.options.mode.chained_assignment = None"
+			]
+		},
+		{
+			"name": "imports-plotting",
+			"code": [
+				"SMALL_SIZE = 10",
+				"MEDIUM_SIZE = 14",
+				"BIGGER_SIZE = 18",
+				"MAPBOX_STYLE = \"dark\"",
+				"MAPBOX_HEIGHT = 800",
+				"%matplotlib inline",
+				"import seaborn as sns",
+				"import matplotlib as mpl",
+				"import matplotlib.font_manager",
+				"import matplotlib.pyplot as plt",
+				"import plotly.express as px",
+				"import plotly.graph_objects as go",
+				"from matplotlib.ticker import PercentFormatter",
+				"px.set_mapbox_access_token(os.getenv(\"MAPBOX_TOKEN\"))",
+				"matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext=\"ttf\")",
+				"plt.style.use(\"seaborn-colorblind\")",
+				"plt.rcParams[\"font.family\"] = \"sans-serif\"",
+				"plt.rcParams[\"font.sans-serif\"] = \"Open Sans\"",
+				"plt.rcParams[\"figure.figsize\"] = 15, 6",
+				"plt.rc('font', size=SMALL_SIZE)          # controls default text sizes",
+				"plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title",
+				"plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels",
+				"plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels",
+				"plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels",
+				"plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize",
+				"plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title"
+			]
+		},
+		{
+			"name": "imports-devops",
+			"code": [
+				"import joblib",
+				"import requests",
+				"import warnings",
+				"from dotenv import load_dotenv",
+				"load_dotenv()",
+				"APIKEY = os.getenv(\"SOME_KEY\")"
+			]
+		},
+		{
+			"name": "imports-ml",
+			"code": [
+				"from mlxtend.plotting import plot_decision_regions",
+				"from sklearn import __version__ as sklearn_version",
+				"from sklearn.cluster import KMeans",
+				"from sklearn.decomposition import NMF, PCA",
+				"from sklearn.dummy import DummyRegressor",
+				"from sklearn.ensemble import (AdaBoostClassifier, BaggingClassifier, GradientBoostingClassifier,",
+                "                              GradientBoostingRegressor, RandomForestClassifier, RandomForestRegressor,",
+                "                              VotingClassifier)",
+				"from sklearn.feature_selection import SelectKBest, f_regression",
+				"from sklearn.impute import SimpleImputer",
+				"from sklearn.linear_model import LinearRegression, LogisticRegression",
+				"from sklearn.manifold import TSNE",
+				"from sklearn.metrics import (accuracy_score, average_precision_score, classification_report,",
+				"                             confusion_matrix, log_loss, mean_absolute_error,",
+				"                             mean_squared_error, plot_precision_recall_curve,",
+				"                             precision_recall_curve, r2_score, roc_auc_score,",
+				"                             roc_curve)",
+				"from sklearn.model_selection import (GridSearchCV, KFold, cross_val_score,",
+				"                                     cross_validate, learning_curve,",
+				"                                     train_test_split)",
+				"from sklearn.neighbors import KNeighborsClassifier",
+				"from sklearn.pipeline import Pipeline, make_pipeline",
+				"from sklearn.preprocessing import (LabelEncoder, MaxAbsScaler, MinMaxScaler, Normalizer,",
+				"                                   StandardScaler, normalize, scale)",
+				"from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor"
+			]
+		},
+		{
+			"name": "imports-rng",
+			"code": [
+				"from numpy.random import default_rng",
+				"RANDOM_SEED = 51",
+				"rng = default_rng(RANDOM_SEED)"
+			]
+		},
+		{
+			"name": "mapbox-zoom",
+			"code": [
+				"def zoom_center(",
+				"    lons: tuple = None,",
+				"    lats: tuple = None,",
+				"    lonlats: tuple = None,",
+				"    format: str = \"lonlat\",",
+				"    projection: str = \"mercator\",",
+				"    width_to_height: float = 2.0,",
+				") -> (float, dict):",
+				"    \"\"\"Finds optimal zoom and centering for a plotly mapbox.",
+				"    Must be passed (lons & lats) or lonlats.",
+				"    Temporary solution awaiting official implementation, see:",
+				"    https://github.com/plotly/plotly.js/issues/3434",
+				"",
+				"    Parameters",
+				"    --------",
+				"    lons: tuple, optional, longitude component of each location",
+				"    lats: tuple, optional, latitude component of each location",
+				"    lonlats: tuple, optional, gps locations",
+				"    format: str, specifying the order of longitud and latitude dimensions,",
+				"        expected values: 'lonlat' or 'latlon', only used if passed lonlats",
+				"    projection: str, only accepting 'mercator' at the moment,",
+				"        raises `NotImplementedError` if other is passed",
+				"    width_to_height: float, expected ratio of final graph's with to height,",
+				"        used to select the constrained axis.",
+				"",
+				"    Returns",
+				"    --------",
+				"    zoom: float, from 1 to 20",
+				"    center: dict, gps position with 'lon' and 'lat' keys",
+				"",
+				"    >>> print(zoom_center((-109.031387, -103.385460),",
+				"    ...     (25.587101, 31.784620)))",
+				"    (5.75, {'lon': -106.208423, 'lat': 28.685861})",
+				"    \"\"\"",
+				"    if lons is None and lats is None:",
+				"        if isinstance(lonlats, tuple):",
+				"            lons, lats = zip(*lonlats)",
+				"        else:",
+				"            raise ValueError(\"Must pass lons & lats or lonlats\")",
+				"",
+				"    maxlon, minlon = max(lons), min(lons)",
+				"    maxlat, minlat = max(lats), min(lats)",
+				"    center = {",
+				"        \"lon\": round((maxlon + minlon) / 2, 6),",
+				"        \"lat\": round((maxlat + minlat) / 2, 6),",
+				"    }",
+				"",
+				"    # longitudinal range by zoom level (20 to 1)",
+				"    # in degrees, if centered at equator",
+				"    lon_zoom_range = np.array(",
+				"        [",
+				"            0.0007,",
+				"            0.0014,",
+				"            0.003,",
+				"            0.006,",
+				"            0.012,",
+				"            0.024,",
+				"            0.048,",
+				"            0.096,",
+				"            0.192,",
+				"            0.3712,",
+				"            0.768,",
+				"            1.536,",
+				"            3.072,",
+				"            6.144,",
+				"            11.8784,",
+				"            23.7568,",
+				"            47.5136,",
+				"            98.304,",
+				"            190.0544,",
+				"            360.0,",
+				"        ]",
+				"    )",
+				"",
+				"    if projection == \"mercator\":",
+				"        margin = 1.2",
+				"        height = (maxlat - minlat) * margin * width_to_height",
+				"        width = (maxlon - minlon) * margin",
+				"        lon_zoom = np.interp(width, lon_zoom_range, range(20, 0, -1))",
+				"        lat_zoom = np.interp(height, lon_zoom_range, range(20, 0, -1))",
+				"        zoom = round(min(lon_zoom, lat_zoom), 2)",
+				"    else:",
+				"        raise NotImplementedError(f\"{projection} projection is not implemented\")",
+				"",
+				"    return zoom, center"
+			]
+		},
+		{
+			"name": "profiling",
+			"code": [
+				"import cProfile",
+				"pr = cProfile.Profile()",
+				"pr.disable()",
+				"",
+				"# inspect",
+				"profile_report = df.profile_report(",
+				"    sort=None,",
+				"    explorative=True,",
+				"    html={\"style\": {\"full_width\": True}},",
+				"    progress_bar=True)",
+				"profile_report.to_file(\"docs/example_profiling.html\")"
+			]
+		},
+		{
+			"name": "plot conf mat",
+			"code": [
+				"def plot_confusion_matrix(data):",
+				"    group_names = [\"TN\", \"FP\", \"FN\", \"TP\"]",
+				"    group_counts = [\"{0:0.0f}\".format(value) for value in data.flatten()]",
+				"    group_percentages = [",
+				"        \"{0:.2%}\".format(value) for value in data.flatten() / np.sum(data)",
+				"    ]",
+				"    labels = [",
+				"        f\"{v1}\\n{v2}\\n{v3}\"",
+				"        for v1, v2, v3 in zip(group_names, group_counts, group_percentages)",
+				"    ]",
+				"    labels = np.asarray(labels).reshape(2, 2)",
+				"    sns.heatmap(data, annot=labels, fmt='', cmap='Blues')"
+			]
+		},
+		{
+			"name": "gpu check",
+			"code": [
+				"import os",
+				"",
+				"import tensorflow as tf",
+				"import tensorflow_hub as hub",
+				"import torch",
+				"from tensorflow.python.client import device_lib",
+				"",
+				"hello = tf.constant(\"Hello, TensorFlow!\")",
+				"with tf.device(\"/gpu:0\"):",
+				"    a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name=\"a\")",
+				"    b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name=\"b\")",
+				"    c = tf.matmul(a, b)",
+				"print(\"-\" * 20)",
+				"print(\"<<< Testing Tensorflow >>>\")",
+				"print(\"<<< Version: \", tf.__version__)",
+				"print(\"<<< Eager mode: \", tf.executing_eagerly())",
+				"print(\"<<< Hub version: \", hub.__version__)",
+				"print(",
+				"    \"<<< GPU is\",",
+				"    \"available\" if tf.config.list_physical_devices(\"GPU\") else \"NOT AVAILABLE\",",
+				")",
+				"print(\"<<< Code check...\")",
+				"tf.print(hello)",
+				"tf.print(c)",
+				"print(\"-\" * 20)",
+				"",
+				"# torch",
+				"print(\"-\" * 20)",
+				"print(\"<<< Testing Torch >>>\")",
+				"print(f\"<<< Version: {torch.__version__}\")",
+				"print(",
+				"    \"<<< GPU is\",",
+				"    \"available\"",
+				"    if any(\"GPU\" in d.name for d in device_lib.list_local_devices())",
+				"    else \"NOT AVAILABLE\",",
+				")",
+				"print(\"<<< CUDA is\", \"available\" if torch.cuda.is_available() else \"NOT AVAILABLE\")",
+				"print(\"<<< Code check...\")",
+				"x = torch.rand(5, 3)",
+				"print(x)",
+				"print(\"-\" * 20)"
+			]
+		},
+		{
+			"name": "inspect function",
+			"code": [
+				"import inspect",
+				"lines = inspect.getsource(foo)",
+				"print(lines)"
+			]
+		},
+		{
+			"name": "logging",
+			"code": [
+				"import logging",
+				"logger = logging.getLogger('root')",
+				"logger.setLevel(logging.DEBUG)",
+				"ch = logging.StreamHandler()",
+				"ch.setLevel(logging.DEBUG)",
+				"logger.addHandler(ch)"
+			]
+		},
+		{
+			"name": "notebook options",
+			"code": [
+				"%matplotlib notebook",
+				"%reload_ext sql_magic",
+				"%config SQL.output_result = False  # disable browser notifications",
+				"%config SQL.notify_result = False  # disable output to std out",
+				"%reload_ext watermark",
+				"%watermark -a 'Ken Cavagnolo' -n -u -v -m -h -g -p jupyter,notebook,pandas,numpy,scipy",
+				"sns.set_style('whitegrid')",
+				"sns.set_context('notebook')"
+			]
+		}
+	]
+}

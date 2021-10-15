@@ -1,0 +1,7 @@
+# Source ~/.bashrc in the event of a shell
+# looking for a .bash_profile
+
+source ~/.bashrc
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

@@ -1,19 +1,55 @@
 ##################
-# macOS specific #
+# linux specific #
 ##################
 
-alias killfinder="killall Finder"
-alias killdock="killall Dock"
-alias killmenubar="killall SystemUIServer NotificationCenter"
-alias killos="killfinder && killdock && killmenubar"
-alias get-app-id="osascript -e 'id of app \"$1\"'"
-alias cleanupds="find . -type f -name '*.DS_Store' -ls -exec /bin/rm {} \;"
-alias cleanupad="find . -type d -name '.AppleD*' -ls -exec /bin/rm -r {} \;"
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-alias desktopshow="defaults write com.apple.finder CreateDesktop -bool true && killfinder"
-alias desktophide="defaults write com.apple.finder CreateDesktop -bool false && killfinder"
-alias deathtodsstore="defaults write com.apple.desktopservices DSDontWriteNetworkStores true"
-alias revivedsstore="defaults write com.apple.desktopservices DSDontWriteNetworkStores false"
+if [ "$(uname)" == "Linux" ]; then
+    alias pbcopy="xclip -selection clipboard"
+    alias open="xdg-open"
+fi
+
+#######
+# k8s #
+#######
+
+# kubectl... cube control? cube cuddle? who cares
+function kubectl() {
+    echo "+ kubectl $@" >&2
+    command kubectl $@
+}
+alias k="kubectl"
+
+# check status
+alias check-k8s='k cluster-info'
+
+# get something from k8s
+alias kg='k get'
+
+# get a pod
+alias kgpo='k get pod'
+
+# get a service
+alias kgsvc='k get services --sort-by=.metadata.name'
+
+# get a pod in a namespace
+alias ksysgpo='k --namespace=kube-system get pod'
+
+# delete something from k8s
+alias krm='k delete'
+
+# force delete something from k8s
+alias krmf='k delete -f'
+
+# get k8s events
+alias kevents='k get events --sort-by=.metadata.creationTimestamp'
+
+# force apply changes to k8s
+alias ka='k apply -f'
+
+# fetch k8s logs
+alias klo='k logs -f'
+
+# execute a command on k8s
+alias kex='k exec -i -t'
 
 ##################
 ##################
@@ -27,8 +63,6 @@ alias paths='echo -e ${PATH//:/\\n}'
 alias clearmem='sudo sysctl vm.drop_caches=3'
 alias cpuwatcher='watch -n 1 "ps -e -o pid,user,command,etime,xstat,pmem,pcpu -r | head -n 15"'
 alias memwatcher='watch -n 1 "ps -e -o pid,user,command,etime,xstat,pmem,pcpu -m | head -n 15"'
-#alias zombie_count="ps aux | awk {'print $8'} | grep -c Z"
-#alias zombie_list="ps aux | awk '{ print $8 " " $2 }' | grep -w Z"
 
 # shorthand
 alias clean='rm -f *~ *#'
@@ -52,6 +86,7 @@ alias ls='exa -abghl --git --group-directories-first'
 alias newest='ls -snew'
 
 # find stuff
+alias grep='grep -E --color -i'
 alias grepper='grep -n \!:1 * /dev/null'
 
 # start jupyter
@@ -59,27 +94,71 @@ alias ipynote='jupyter notebook'
 alias notebook2jekyll='jupyter-nbconvert --config jekyll-post'
 
 # git shorthand
-alias gis='git status '
-alias gia='git add '
-alias gib='git branch '
-alias gic='git commit'
-alias gid='git diff'
-alias gio='git checkout '
-alias gik='gitk --all&'
-alias gix='gitx --all'
-
-# start jekyll
-alias go_jekyll='bundle exec jekyll serve --watch --trace --drafts --verbose'
+ghcreate() {
+    curl https://api.github.com/user/repos?access_token=$GITHUB_PERSONAL_REPO_TOKEN \
+        -d "{\"name\":\"${PWD##*/}\", \
+         \"description\":\"$1\", \
+         \"private\":\"$2\", \
+         \"has_issues\":\"false\", \
+         \"has_projects\":\"false\", \
+         \"has_wiki\":\"false\"
+        }"
+}
+ghinit() {
+    git init
+    git add .
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin git@github-kc:kcavagnolo/${PWD##*/}.git
+    git push -u origin main
+}
 
 # ip addresses
 alias localip="ipconfig getifaddr en0"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # update ssh keys; first command prints exit val, so need $2, not $1 as input
-alias keysupdate="eval \"$(ssh-agent -s)\" ; ssh-add -K $2"
+keyagentup() {
+    for possiblekey in ${HOME}/.ssh/id_*; do
+        if grep -q PRIVATE "$possiblekey"; then
+            ssh-add "$possiblekey"
+        fi
+    done
+}
+
+# list off zombies
+zombie-list() {
+    echo -e "## I see you zombies... [¬º-°]¬\n"
+    for pid in $(ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }'); do
+        pstree -p $pid
+        echo -e "\n"
+    done
+}
+
+zombie-kill() {
+    echo -e "## DIE ZOMBIES! (╯°□°)--︻╦╤─ - - -   [¬º-°]¬"
+    for pid in $(ps axo pid=,stat= | awk '$2~/^Z/ { print $1 }'); do
+        echo "Killing $pid"
+        kill -9 $pid
+    done
+}
 
 # copy public key to clipboard
-alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '>>> Public key copied to clipboard'"
+alias pubkey="cat ~/.ssh/$1 | pbcopy | echo '>>> Public key copied to clipboard'"
 
 # Python snippets
-alias edit_snippets='sudo emacs -nw /usr/local/share/jupyter/nbextensions/snippets/snippets.json'
+alias edit-snippets='sudo emacs -nw ~/.local/share/jupyter/nbextensions/snippets/snippets.json'
+alias pypkgver='python3 -c "import $1; print($1.__version__)"'
+
+# template readme
+alias add-readme='cp ~/.dotfiles/assets/template_readme README.md'
+
+# rename all files w/o whitespace or uppercase
+alias nospace='rename "s/ +\././; y/A-Z /a-z_/" *'
+alias lowercase='rename "y/A-Z/a-z/" *'
+
+# Docker annihilation
+alias docker-nuke='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -a -q)'
+
+# see dir tree
+alias dirtree='tree -L 1 --dirsfirst -a'

@@ -1,12 +1,12 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "bash-it"]
-	path = bash-it
-	url = https://github.com/Bash-it/bash-it
-[submodule "bash-wakatime"]
-	path = bash-wakatime
-	url = https://github.com/irondoge/bash-wakatime
+[submodule "git-subrepo"]
+	path = git-subrepo
+	url = https://github.com/ingydotnet/git-subrepo
 [submodule "dotbot-brewfile"]
 	path = dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
+[submodule "vscode-settings"]
+	path = vscode-settings
+	url = git@gist.github.com:deb3caa658eb89379e8db80a0debded0.git

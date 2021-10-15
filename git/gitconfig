@@ -1,0 +1,279 @@
+[alias]
+
+    #########
+    # admin #
+    #########    
+
+    # see all git aliases
+    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+    # ec -- "edit config"
+    ec = config --global -e
+
+    # Show verbose output about tags, branches, remotes, tags
+    b = branch -alv
+    r = remote -v
+    s = status --ahead-behind --long -bu
+    t = tag -l -n
+
+    # List contributors with number of commits
+    contribs = shortlog --summary --numbered
+
+    ###########
+    # general #
+    ###########
+
+    # c -- "clone"
+    c = clone --recursive
+
+    # p -- "pull"
+    p = !"git pull; git submodule foreach git pull"
+
+    # rp -- "rebase pull"
+    rp = !"git pull --rebase origin master"
+
+    # pl -- "push lease"
+    pl = !"git push origin `git symbolic-ref --short HEAD` --force-with-lease"
+
+    # ca -- "commit all changes"
+    ca = !git add -A && git commit -v -S -nam
+
+    # am -- "amend the currently staged files to the latest commit"
+    am = commit --amend --reuse-message=HEAD
+
+    # up -- "update"
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive --remote
+
+    # sp -- "subrepo pull"
+    sp = !"git pull; git subrepo pull --all"
+
+    # save -- "create a save point"
+    save = !git add -A && git commit -m 'SAVEPOINT'
+
+    # wipe -- "a proper reset"
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+    ##############
+    # branch ops #
+    ##############
+
+    # co -- "checkout branch"
+    co = checkout
+
+    # cb -- "create branch"
+    cb = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+    # db -- "delete branch"
+    db = "!f() { git branch -d \"$1\"; }; f"
+    
+    # pub -- "publish branch"
+    pub = "!git push -u origin `git symbolic-ref --short HEAD`"
+
+    # unpub -- "unpublish branch"
+    unpub = "!git push origin :`git symbolic-ref --short HEAD`"
+
+    # merge upstream
+    mu = !git fetch --all && git co master && git merge upstream/master && git commit -m \"merged upstream\" && git push
+
+    # su -- "set upstream"
+    su = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+
+    # uu -- "update upstream"
+    uu = !git remote set-url origin
+
+    # dm -- "delete merged branches on master"
+    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    ####################
+    # diff and log ops #
+    ####################
+
+    # l -- "logs"
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+    # d -- "diff latest commit and the current state"
+    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+
+    # di -- "diff between the state `$number` revisions ago and the current state"
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+    ###############
+    # maintenance #
+    ###############    
+
+    # reb -- "rebase interactively using the given number of latest commits"
+    reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+    # retag -- "remove the old tag with this name and tag the latest commit with it"
+    retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+    # Find branches containing commit
+    fb = "!f() { git branch -a --contains $1; }; f"
+
+    # Find tags containing commit
+    ft = "!f() { git describe --always --contains $1; }; f"
+
+    # Find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+    # Find commits by commit message
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+    # rpr -- "review pull request"
+    rpr = "!f() { \
+        git fetch origin && \
+        git checkout `git symbolic-ref --short HEAD` origin/`git symbolic-ref --short HEAD` && \
+        git merge master; \
+    }; f"
+
+    # mpr -- "merge pull request on top of the `master` branch"
+    mpr = "!f() { \
+        if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+            git fetch origin refs/pull/$1/head:pr/$1 && \
+            git rebase master pr/$1 && \
+            git checkout master && \
+            git merge pr/$1 && \
+            git branch -D pr/$1 && \
+            git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses pr-$1.\"; \
+        fi \
+    }; f"
+
+    # um -- "update mirror"
+    um = !"git fetch -p origin; git push --mirror"
+
+[apply]
+
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
+
+[core]
+
+    # Use custom `.gitignore` and `.gitattributes`
+    excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+    # Make `git rebase` safer on OS X
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeunicode = false
+
+
+    # default message editor
+    editor = emacs --wait
+
+    # handle line endings
+    # https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings
+    autocrlf = input
+
+[color]
+
+    # Use colors in Git commands that are capable of colored output when
+    # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = true
+
+[color "branch"]
+
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+
+    meta = yellow bold
+    frag = magenta bold # line info
+    old = red # deletions
+    new = green # additions
+
+[color "status"]
+
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[diff]
+
+    # Detect copies as well as renames
+    renames = copies
+    indentHeuristic = on
+
+[help]
+
+    # Automatically correct and execute mistyped commands
+    autocorrect = 1
+
+[merge]
+
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
+
+[push]
+
+    # Use the Git 1.x.x default to avoid errors on machines with old Git
+    # installations. To use `simple` instead, add this to your `~/.extra` file:
+    # `git config --global push.default simple`. See http://git.io/mMah-w.
+    default = matching
+
+    # Make `git push` push relevant annotated tags when pushing branches out.
+	followTags = true
+
+[credential]
+	helper = osxkeychain
+
+[http]
+	postBuffer = 524288000
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[secrets]
+	providers = git secrets --aws-provider
+	patterns = [A-Z0-9]{20}
+	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+	allowed = AKIAIOSFODNN7EXAMPLE
+	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA|SFMAPS)[A-Z0-9]{16}
+
+[init]
+	templateDir = /Users/cavagnolo/.git-templates/git-secrets
+
+[fetch]
+	prune = true
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = /usr/local/bin/gpg
+
+[includeIf "gitdir:~/.dotfiles/"]
+  path = .gitconfig-personal
+
+[includeIf "gitdir:~/personal/"]
+  path = .gitconfig-personal
+
+[includeIf "gitdir:~/work/"]
+  path = .gitconfig-work
+
+[pager]
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[pull]
+	ff = only

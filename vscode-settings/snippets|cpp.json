@@ -1,0 +1,38 @@
+{
+    "C++ Main Stub": {
+        "prefix": "cpp-prog-stub",
+        "body": [
+          "#include <iostream>",
+          "#include <string>",
+          "#include <vector>",
+          "#include <algorithm>",
+          "",
+          "using namespace std;",
+          "",
+          "int main()",
+          "{",
+          "    return 0;",
+          "}"
+        ],
+        "description": "Simplest C++ Program"
+      },
+      "C++ Class Stub": {
+        "prefix": "cpp-class-stub",
+        "body": [
+          "#include <string>",
+          "#include <vector>",
+          "",
+          "class SomeClass",
+          "{",
+          "private:",
+          "    int some_num;",
+          "    std::vector<AnotherClass> log;",
+          "public:",
+          "    SomeClass();",
+          "    bool SomeFunc(int another_num);",
+          "    std::vector<std::string> SomeOtherFunc();",
+          "};"
+        ],
+        "description": "Simplest C++ Class"
+      }
+}
